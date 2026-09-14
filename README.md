@@ -95,3 +95,9 @@ Owning the path from a merged pull request to a running production server: pipel
 | **[repo-name](https://github.com/AlexandreRomagnoli/repo-name)** | One line on the problem it solves. | PHP · Redis |
 
 -->
+
+---
+
+<p align="right">
+  <img alt="Profile views" src="https://komarev.com/ghpvc/?username=AlexandreRomagnoli&label=Profile%20views&color=5B5BD6&style=flat-square&abbreviated=true">
+</p>
