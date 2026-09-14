@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320" role="img" aria-label="Monitoring dashboard: live CPU, request rate and queue depth graphs, 90-day uptime and a verified nightly backup">
+  <style>
+    @keyframes up     { from { opacity: 0; transform: translateY(7px) } to { opacity: 1; transform: none } }
+    @keyframes grow   { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+    @keyframes lit    { from { opacity: 0; transform: scaleY(.2) } to { opacity: 1; transform: none } }
+    @keyframes ping   { 0% { transform: scale(1); opacity: .6 } 70%, 100% { transform: scale(3.4); opacity: 0 } }
+    /* Les courbes contiennent deux periodes identiques : un defilement de 312 px boucle sans raccord */
+    @keyframes scroll { to { transform: translateX(-312px) } }
+    @keyframes backup { 0% { transform: scaleX(0); opacity: 1 } 40%, 90% { transform: scaleX(1); opacity: 1 } 96%, 100% { transform: scaleX(1); opacity: 0 } }
+    @keyframes run    { 0%, 40% { opacity: 1 } 42%, 94% { opacity: 0 } 98%, 100% { opacity: 1 } }
+    @keyframes ok     { 0%, 41% { opacity: 0 } 43%, 90% { opacity: 1 } 96%, 100% { opacity: 0 } }
+
+    .card, .rowin { animation: up .45s cubic-bezier(.2,.7,.3,1) both; }
+    .reveal { transform-box: fill-box; transform-origin: left center; animation: grow 1.4s cubic-bezier(.4,0,.2,1) both; }
+    .scroll { animation: scroll 14s linear 2s infinite; }
+    .ping { transform-box: fill-box; transform-origin: center; animation: ping 2.6s ease-out infinite both; }
+    .sq { transform-box: fill-box; transform-origin: center bottom; animation: lit .3s cubic-bezier(.2,.7,.3,1) both; }
+    .bk { transform-box: fill-box; transform-origin: left center; animation: backup 10s cubic-bezier(.4,0,.6,1) 1.6s infinite both; }
+    .run { animation: run 10s linear 1.6s infinite both; }
+    .ok  { animation: ok  10s linear 1.6s infinite both; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card, .rowin, .reveal, .sq, .bk, .ok { animation: none; opacity: 1; transform: none; }
+      .scroll { animation: none; }
+      .ping, .run { animation: none; opacity: 0; }
+    }
+  </style>
+  <defs>
+    <clipPath id="g0"><rect class="reveal" style="animation-delay:0.50s" x="68" y="106" width="312" height="94"/></clipPath>
+    <clipPath id="g1"><rect class="reveal" style="animation-delay:0.65s" x="444" y="106" width="312" height="94"/></clipPath>
+    <clipPath id="g2"><rect class="reveal" style="animation-delay:0.80s" x="820" y="106" width="312" height="94"/></clipPath>
+  </defs>
+
+  <rect width="1200" height="320" fill="#10131A"/>
+  <rect x="0" y="0" width="6" height="320" fill="#5B5BD6"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace">
+    <text x="48" y="46" fill="#5A6376" font-size="13" letter-spacing="2">MONITORING</text>
+    <text x="1152" y="46" fill="#5A6376" font-size="13" text-anchor="end">zabbix · web-01</text>
+
+    <g class="card" style="animation-delay:0.15s">
+      <rect x="48" y="66" width="352" height="152" fill="#191D28"/>
+      <circle class="ping" style="animation-delay:1.4s" cx="72" cy="91" r="4" fill="#1AC1AE"/>
+      <circle cx="72" cy="91" r="4" fill="#1AC1AE"/>
+      <text x="86" y="96" fill="#8891A5" font-size="12" letter-spacing="2">CPU</text>
+      <text x="380" y="97" fill="#1AC1AE" font-size="18" font-weight="700" text-anchor="end">23%</text>
+      <rect x="68" y="134" width="312" height="1" fill="#1F2430"/><rect x="68" y="156" width="312" height="1" fill="#1F2430"/><rect x="68" y="178" width="312" height="1" fill="#1F2430"/>
+      <g clip-path="url(#g0)"><g class="scroll">
+        <path d="M68 169.2 L94 163.0 L120 166.6 L146 151.6 L172 157.8 L198 164.8 L224 145.4 L250 154.2 L276 160.4 L302 149.0 L328 163.9 L354 167.4 L380 169.2 L406 163.0 L432 166.6 L458 151.6 L484 157.8 L510 164.8 L536 145.4 L562 154.2 L588 160.4 L614 149.0 L640 163.9 L666 167.4 L692 169.2 L692 200 L68 200 Z" fill="#1AC1AE" fill-opacity=".12"/>
+        <path d="M68 169.2 L94 163.0 L120 166.6 L146 151.6 L172 157.8 L198 164.8 L224 145.4 L250 154.2 L276 160.4 L302 149.0 L328 163.9 L354 167.4 L380 169.2 L406 163.0 L432 166.6 L458 151.6 L484 157.8 L510 164.8 L536 145.4 L562 154.2 L588 160.4 L614 149.0 L640 163.9 L666 167.4 L692 169.2" fill="none" stroke="#1AC1AE" stroke-width="2" stroke-linejoin="round"/>
+      </g></g>
+    </g>
+    <g class="card" style="animation-delay:0.25s">
+      <rect x="424" y="66" width="352" height="152" fill="#191D28"/>
+      <circle class="ping" style="animation-delay:2.0s" cx="448" cy="91" r="4" fill="#9C99F5"/>
+      <circle cx="448" cy="91" r="4" fill="#9C99F5"/>
+      <text x="462" y="96" fill="#8891A5" font-size="12" letter-spacing="2">REQ/S</text>
+      <text x="756" y="97" fill="#9C99F5" font-size="18" font-weight="700" text-anchor="end">184</text>
+      <rect x="444" y="134" width="312" height="1" fill="#1F2430"/><rect x="444" y="156" width="312" height="1" fill="#1F2430"/><rect x="444" y="178" width="312" height="1" fill="#1F2430"/>
+      <g clip-path="url(#g1)"><g class="scroll">
+        <path d="M444 151.6 L470 147.2 L496 154.2 L522 140.2 L548 134.9 L574 144.6 L600 149.0 L626 133.1 L652 138.4 L678 141.9 L704 146.3 L730 149.8 L756 151.6 L782 147.2 L808 154.2 L834 140.2 L860 134.9 L886 144.6 L912 149.0 L938 133.1 L964 138.4 L990 141.9 L1016 146.3 L1042 149.8 L1068 151.6 L1068 200 L444 200 Z" fill="#9C99F5" fill-opacity=".12"/>
+        <path d="M444 151.6 L470 147.2 L496 154.2 L522 140.2 L548 134.9 L574 144.6 L600 149.0 L626 133.1 L652 138.4 L678 141.9 L704 146.3 L730 149.8 L756 151.6 L782 147.2 L808 154.2 L834 140.2 L860 134.9 L886 144.6 L912 149.0 L938 133.1 L964 138.4 L990 141.9 L1016 146.3 L1042 149.8 L1068 151.6" fill="none" stroke="#9C99F5" stroke-width="2" stroke-linejoin="round"/>
+      </g></g>
+    </g>
+    <g class="card" style="animation-delay:0.35s">
+      <rect x="800" y="66" width="352" height="152" fill="#191D28"/>
+      <circle class="ping" style="animation-delay:2.6s" cx="824" cy="91" r="4" fill="#FFB224"/>
+      <circle cx="824" cy="91" r="4" fill="#FFB224"/>
+      <text x="838" y="96" fill="#8891A5" font-size="12" letter-spacing="2">QUEUE</text>
+      <text x="1132" y="97" fill="#FFB224" font-size="18" font-weight="700" text-anchor="end">3</text>
+      <rect x="820" y="134" width="312" height="1" fill="#1F2430"/><rect x="820" y="156" width="312" height="1" fill="#1F2430"/><rect x="820" y="178" width="312" height="1" fill="#1F2430"/>
+      <g clip-path="url(#g2)"><g class="scroll">
+        <path d="M820 189.4 L846 177.1 L872 185.9 L898 164.8 L924 182.4 L950 188.6 L976 172.7 L1002 184.2 L1028 168.3 L1054 186.8 L1080 179.8 L1106 185.0 L1132 189.4 L1158 177.1 L1184 185.9 L1210 164.8 L1236 182.4 L1262 188.6 L1288 172.7 L1314 184.2 L1340 168.3 L1366 186.8 L1392 179.8 L1418 185.0 L1444 189.4 L1444 200 L820 200 Z" fill="#FFB224" fill-opacity=".12"/>
+        <path d="M820 189.4 L846 177.1 L872 185.9 L898 164.8 L924 182.4 L950 188.6 L976 172.7 L1002 184.2 L1028 168.3 L1054 186.8 L1080 179.8 L1106 185.0 L1132 189.4 L1158 177.1 L1184 185.9 L1210 164.8 L1236 182.4 L1262 188.6 L1288 172.7 L1314 184.2 L1340 168.3 L1366 186.8 L1392 179.8 L1418 185.0 L1444 189.4" fill="none" stroke="#FFB224" stroke-width="2" stroke-linejoin="round"/>
+      </g></g>
+    </g>
+
+    <g class="rowin" style="animation-delay:.9s">
+      <text x="48" y="257" fill="#5A6376" font-size="12" letter-spacing="2">UPTIME · 90D</text>
+      <text x="1152" y="258" fill="#1AC1AE" font-size="15" text-anchor="end">99.98%</text>
+    </g>
+    <rect class="sq" style="animation-delay:1.00s" x="200" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.02s" x="213" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.04s" x="226" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.06s" x="239" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.08s" x="252" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.10s" x="265" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.12s" x="278" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.14s" x="291" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.16s" x="304" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.18s" x="317" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.20s" x="330" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.22s" x="343" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.24s" x="356" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.26s" x="369" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.28s" x="382" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.30s" x="395" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.32s" x="408" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.34s" x="421" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.36s" x="434" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.38s" x="447" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.40s" x="460" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.42s" x="473" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.44s" x="486" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.46s" x="499" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.48s" x="512" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.50s" x="525" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.52s" x="538" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.54s" x="551" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.56s" x="564" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.58s" x="577" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.60s" x="590" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.62s" x="603" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.64s" x="616" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.66s" x="629" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.68s" x="642" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.70s" x="655" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.72s" x="668" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.74s" x="681" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.76s" x="694" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.78s" x="707" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.80s" x="720" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.82s" x="733" y="242" width="10" height="20" fill="#FFB224"/><rect class="sq" style="animation-delay:1.84s" x="746" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.86s" x="759" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.88s" x="772" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.90s" x="785" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.92s" x="798" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.94s" x="811" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.96s" x="824" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:1.98s" x="837" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:2.00s" x="850" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:2.02s" x="863" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:2.04s" x="876" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:2.06s" x="889" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:2.08s" x="902" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:2.10s" x="915" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:2.12s" x="928" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:2.14s" x="941" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:2.16s" x="954" y="242" width="10" height="20" fill="#12A594"/><rect class="sq" style="animation-delay:2.18s" x="967" y="242" width="10" height="20" fill="#12A594"/>
+
+    <g class="rowin" style="animation-delay:1.2s">
+      <text x="48" y="297" fill="#5A6376" font-size="12" letter-spacing="2">BACKUP · NIGHTLY</text>
+      <rect x="200" y="289" width="777" height="6" fill="#2C3242"/>
+    </g>
+    <rect class="bk" x="200" y="289" width="777" height="6" fill="#12A594"/>
+    <text class="run" x="1152" y="297" fill="#FFB224" font-size="14" text-anchor="end">running…</text>
+    <text class="ok" x="1152" y="297" fill="#1AC1AE" font-size="14" text-anchor="end">verified &#10003;</text>
+  </g>
+</svg>

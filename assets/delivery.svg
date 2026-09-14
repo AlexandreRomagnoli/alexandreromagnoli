@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="1200" height="360" role="img" aria-label="Delivery: a feature branch with a migration, code and tests is merged into main, then release v2.15.0 is promoted from dev to preprod to production with a rollback ready">
+  <style>
+    @keyframes up   { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
+    @keyframes pop  { from { opacity: 0; transform: scale(.3) } to { opacity: 1; transform: none } }
+    @keyframes draw { from { stroke-dashoffset: 1 } to { stroke-dashoffset: 0 } }
+    @keyframes flow { to { stroke-dashoffset: -20 } }
+
+    /* Un cycle de 9 s : le merge part vers dev, puis preprod, puis production */
+    @keyframes marker {
+      0%        { opacity: 0; transform: translate(0, 0) }
+      3%        { opacity: 1; transform: translate(0, 0) }
+      12%, 30%  { opacity: 1; transform: translate(220px, 0) }
+      38%, 56%  { opacity: 1; transform: translate(220px, 90px) }
+      64%, 90%  { opacity: 1; transform: translate(220px, 180px) }
+      95%, 100% { opacity: 0; transform: translate(220px, 180px) }
+    }
+    @keyframes tag {
+      0%, 11%   { opacity: 0; transform: translateY(0) }
+      13%, 30%  { opacity: 1; transform: translateY(0) }
+      38%, 56%  { opacity: 1; transform: translateY(90px) }
+      64%, 90%  { opacity: 1; transform: translateY(180px) }
+      95%, 100% { opacity: 0; transform: translateY(180px) }
+    }
+    @keyframes rail {
+      0%, 30%   { opacity: 1; transform: scaleY(0) }
+      38%, 56%  { opacity: 1; transform: scaleY(.5) }
+      64%, 90%  { opacity: 1; transform: scaleY(1) }
+      95%, 100% { opacity: 0; transform: scaleY(1) }
+    }
+    @keyframes on1  { 0%, 12% { opacity: 0 } 14%, 90% { opacity: 1 } 95%, 100% { opacity: 0 } }
+    @keyframes on2  { 0%, 38% { opacity: 0 } 40%, 90% { opacity: 1 } 95%, 100% { opacity: 0 } }
+    @keyframes on3  { 0%, 64% { opacity: 0 } 66%, 90% { opacity: 1 } 95%, 100% { opacity: 0 } }
+    @keyframes on4  { 0%, 72% { opacity: 0 } 75%, 90% { opacity: 1 } 95%, 100% { opacity: 0 } }
+    @keyframes off1 { 0%, 12% { opacity: 1 } 13%, 94% { opacity: 0 } 98%, 100% { opacity: 1 } }
+    @keyframes off2 { 0%, 38% { opacity: 1 } 39%, 94% { opacity: 0 } 98%, 100% { opacity: 1 } }
+    @keyframes off3 { 0%, 64% { opacity: 1 } 65%, 94% { opacity: 0 } 98%, 100% { opacity: 1 } }
+
+    .env, .pop-up, .lbl { animation: up .45s cubic-bezier(.2,.7,.3,1) both; }
+    .pop { transform-box: fill-box; transform-origin: center; animation: pop .4s cubic-bezier(.2,.7,.3,1) both; }
+    .draw { stroke-dasharray: 1; animation: draw linear both; }
+    .d-main   { animation-duration: .8s; animation-delay: .1s; }
+    .d-branch { animation-duration: 1.2s; animation-delay: .5s; }
+    .link { stroke-dasharray: 4 6; animation: flow 1s linear infinite, up .4s ease-out 1.9s both; }
+
+    .loop { animation-duration: 9s; animation-delay: 2.4s; animation-iteration-count: infinite; animation-fill-mode: both; }
+    .marker { animation-name: marker; animation-timing-function: cubic-bezier(.5,0,.3,1); }
+    .tag    { animation-name: tag;    animation-timing-function: cubic-bezier(.5,0,.3,1); }
+    .rail   { animation-name: rail;   animation-timing-function: cubic-bezier(.5,0,.3,1); transform-box: fill-box; transform-origin: center top; }
+    .st, .pend { animation-duration: 9s; animation-delay: 2.4s; animation-iteration-count: infinite; animation-fill-mode: both; animation-timing-function: linear; }
+    .n1 { animation-name: on1 } .n2 { animation-name: on2 } .n3 { animation-name: on3 } .n4 { animation-name: on4 }
+    .p1 { animation-name: off1 } .p2 { animation-name: off2 } .p3 { animation-name: off3 }
+
+    @media (prefers-reduced-motion: reduce) {
+      .env, .pop-up, .lbl, .pop, .st, .rail { animation: none; opacity: 1; transform: none; }
+      .draw { animation: none; stroke-dashoffset: 0; }
+      .link { animation: none; opacity: 1; }
+      .pend, .marker { animation: none; opacity: 0; }
+      .tag { animation: none; opacity: 1; transform: translateY(180px); }
+    }
+  </style>
+  <rect width="1200" height="360" fill="#10131A"/>
+  <rect x="0" y="0" width="6" height="360" fill="#5B5BD6"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace">
+    <text x="48" y="44" fill="#5A6376" font-size="13" letter-spacing="2">HISTORY</text>
+    <text x="700" y="44" fill="#5A6376" font-size="13" letter-spacing="2">RELEASE</text>
+
+    <path class="draw d-main" pathLength="1" d="M60 110 H600" fill="none" stroke="#5A6376" stroke-width="3"/>
+    <path class="draw d-branch" pathLength="1" d="M140 110 C170 110 170 190 200 190 H440 C480 190 480 110 520 110" fill="none" stroke="#5B5BD6" stroke-width="3"/>
+    <line class="link" x1="606" y1="110" x2="730" y2="110" stroke="#2C3242" stroke-width="3"/>
+
+    <text class="lbl" style="animation-delay:.3s" x="60" y="92" fill="#8891A5" font-size="13">main</text>
+    <text class="lbl" style="animation-delay:.8s" x="200" y="222" fill="#8891A5" font-size="13">feature/order-export</text>
+    <text class="lbl" style="animation-delay:1.8s" x="520" y="88" fill="#8891A5" font-size="13" text-anchor="middle">merge #214</text>
+
+    <circle class="pop" style="animation-delay:0.15s" cx="80" cy="110" r="6" fill="#5A6376"/>
+    <circle class="pop" style="animation-delay:0.22s" cx="140" cy="110" r="6" fill="#5A6376"/>
+    <circle class="pop" style="animation-delay:0.86s" cx="240" cy="190" r="6" fill="#9C99F5"/>
+    <circle class="pop" style="animation-delay:1.08s" cx="320" cy="190" r="6" fill="#9C99F5"/>
+    <circle class="pop" style="animation-delay:1.29s" cx="400" cy="190" r="6" fill="#9C99F5"/>
+    <circle class="pop" style="animation-delay:1.70s" cx="520" cy="110" r="8" fill="#10131A" stroke="#FFB224" stroke-width="3"/>
+
+    <text class="pop-up" style="animation-delay:1.30s" x="60" y="262" font-size="14"><tspan fill="#5A6376">7d03be1</tspan><tspan fill="#E6E8EE">&#160;&#160;test: cover export edge cases</tspan></text>
+    <text class="pop-up" style="animation-delay:1.10s" x="60" y="290" font-size="14"><tspan fill="#5A6376">e92c4a0</tspan><tspan fill="#E6E8EE">&#160;&#160;feat: export orders as CSV</tspan></text>
+    <text class="pop-up" style="animation-delay:0.90s" x="60" y="318" font-size="14"><tspan fill="#5A6376">a41f9c2</tspan><tspan fill="#E6E8EE">&#160;&#160;migration: Version20260914101500</tspan></text>
+
+    <rect x="738" y="110" width="4" height="180" fill="#2C3242"/>
+    <rect class="loop rail" x="738" y="110" width="4" height="180" fill="#12A594"/>
+
+    <g class="env" style="animation-delay:0.3s">
+      <rect x="770" y="82" width="382" height="56" fill="#191D28"/>
+      <rect x="770" y="82" width="4" height="56" fill="#5B5BD6"/>
+      <text x="792" y="106" fill="#E6E8EE" font-size="16">dev</text>
+      <rect x="733" y="103" width="14" height="14" fill="#2C3242"/>
+    </g>
+    <text class="pend p1" x="792" y="128" fill="#5A6376" font-size="13">waiting</text>
+    <text class="st n1" x="792" y="128" fill="#1AC1AE" font-size="13">deployed</text>
+    <rect class="st n1" x="733" y="103" width="14" height="14" fill="#12A594"/>
+    <g class="env" style="animation-delay:0.4s">
+      <rect x="770" y="172" width="382" height="56" fill="#191D28"/>
+      <rect x="770" y="172" width="4" height="56" fill="#5B5BD6"/>
+      <text x="792" y="196" fill="#E6E8EE" font-size="16">preprod</text>
+      <rect x="733" y="193" width="14" height="14" fill="#2C3242"/>
+    </g>
+    <text class="pend p2" x="792" y="218" fill="#5A6376" font-size="13">waiting</text>
+    <text class="st n2" x="792" y="218" fill="#1AC1AE" font-size="13">deployed</text>
+    <rect class="st n2" x="733" y="193" width="14" height="14" fill="#12A594"/>
+    <g class="env" style="animation-delay:0.5s">
+      <rect x="770" y="262" width="382" height="56" fill="#191D28"/>
+      <rect x="770" y="262" width="4" height="56" fill="#5B5BD6"/>
+      <text x="792" y="286" fill="#E6E8EE" font-size="16">production</text>
+      <rect x="733" y="283" width="14" height="14" fill="#2C3242"/>
+    </g>
+    <text class="pend p3" x="792" y="308" fill="#5A6376" font-size="13">waiting</text>
+    <text class="st n3" x="792" y="308" fill="#1AC1AE" font-size="13">deployed</text>
+      <text class="st n4" x="880" y="308" fill="#9C99F5" font-size="13">&#8634;&#160;rollback ready</text>
+    <rect class="st n3" x="733" y="283" width="14" height="14" fill="#12A594"/>
+
+    <circle class="loop marker" cx="520" cy="110" r="6" fill="#FFB224"/>
+    <g class="loop tag">
+      <rect x="1036" y="96" width="100" height="28" fill="#FFB224"/>
+      <text x="1086" y="115" fill="#10131A" font-size="14" font-weight="700" text-anchor="middle">v2.15.0</text>
+    </g>
+  </g>
+</svg>
